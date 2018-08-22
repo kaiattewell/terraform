@@ -13,4 +13,20 @@ resource "google_compute_instance" "default" {
 			// Ephemeral IP
 		}
 	}
+
+	metadata {
+		sshKeys = "terraform:${file("~/.ssh/id_rsa.pub")}"
+	}
+	provisioner "remote-exec" {
+		connection = {
+			type = "ssh"
+			user = "terraform"
+			private_key = "${file("~/.ssh/id_rsa")}"
+		}
+		scripts = [
+			"scripts/script1",
+			"scripts/script2"
+		]
+	}
 }
+
