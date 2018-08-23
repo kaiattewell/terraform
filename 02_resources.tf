@@ -17,6 +17,19 @@ resource "google_compute_instance" "default" {
 	metadata {
 		sshKeys = "${var.ssh_user}:${file("${var.public_key}")}"
 	}
+
+	 provisioner "remote-exec" {
+                connection = {
+                        type = "ssh"
+                        user = "${var.ssh_user}"
+                        private_key = "${file("${var.private_key}")}"
+                }
+		inline = [
+			"${lookup(var.update_packages, var.package_manager)}",
+			"${lookup(var.update_packages, var.package_manager)} ${join(" ", var.packages)}"
+		]
+	}
+
 	provisioner "remote-exec" {
 		connection = {
 			type = "ssh"
