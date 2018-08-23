@@ -3,6 +3,12 @@ variable "name" {
 	default = "default"
 }
 
+variable "tags" {
+    default = [
+	"default"
+    ]
+}
+
 variable "network" {
 	type = "string"
 	default = "default"
@@ -66,5 +72,12 @@ variable "scripts" {
 	default = [
 		"scripts/script1",
 		"scripts/script2"
+	]
+}
+
+variable "allowed_ports"{
+	default = [
+		"9000",
+		"8080"
 	]
 }
