@@ -1,0 +1,20 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "account_file": "/home/vagrant/keys/terrakey.json",
+      "project_id": "just-zoo-214108",
+      "source_image": "centos-7-v20180815",
+      "source_image_family": "centos-7",
+      "ssh_username": "default",
+      "zone": "europe-west2-c",
+      "image_name": "bigpack-{{timestamp}}"
+    }
+  ],
+"provisioners": [
+	{
+	"type":"shell",
+	"inline": "sudo yum update -y"
+	}
+]
+}
